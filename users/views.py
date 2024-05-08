@@ -1,4 +1,4 @@
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 
@@ -32,6 +32,7 @@ def sign_up(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Поздравляем! Вы успешно зарегистрированы')
             return HttpResponseRedirect(reverse('users:sign_in'))
     else:
         form = UserRegistrationForm()
