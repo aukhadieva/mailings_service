@@ -12,7 +12,7 @@ class ClientForm(forms.ModelForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'class': 'form-control', 'placeholder': 'Email'}))
     comment = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control', 'placeholder': 'Комментарий'}))
+        'class': 'form-control', 'placeholder': 'Комментарий'}), required=False)
 
     class Meta:
         model = Client
