@@ -16,9 +16,9 @@
         <tbody>
         <tr>
             <th scope="row">{{ object.pk }}</th>
-            <td>{{ object.full_name }}</td>
+            <td><a href="{% url 'mailing:view_client' object.pk %}" class="nav-link px-2 text-body-dark">{{ object.full_name }}</a></td>
             <td>{{ object.email }}</td>
-            <td>@{{ object.comment }}</td>
+            <td>{{ object.comment }}</td>
         </tr>
         </tbody>
         {% endfor %}

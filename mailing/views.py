@@ -15,3 +15,7 @@ class ClientCreateView(TitleMixin, CreateView):
 
 class ClientListView(TitleMixin, ListView):
     model = Client
+
+
+class ClientDetailView(TitleMixin, DetailView):
+    model = Client
