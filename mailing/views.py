@@ -11,3 +11,7 @@ class ClientCreateView(TitleMixin, CreateView):
     form_class = ClientForm
     success_url = reverse_lazy('main:index')
     title = 'Создание клиента'
+
+
+class ClientListView(TitleMixin, ListView):
+    model = Client
