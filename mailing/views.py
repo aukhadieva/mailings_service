@@ -1,11 +1,13 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 from mailing.forms import ClientForm
 from mailing.models import Client
+from utils import TitleMixin
 
 
-class ClientCreateView(CreateView):
+class ClientCreateView(TitleMixin, CreateView):
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy('main:index')
+    title = 'Создание клиента'
