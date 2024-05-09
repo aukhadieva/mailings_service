@@ -5,6 +5,7 @@
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
                 {% if user.is_superuser or user.is_staff %}
+                <a class="btn btn-sm btn-outline-dark" href="{% url 'mailing:create_client' %}">Создать клиента</a>
                 <a class="btn btn-sm btn-outline-dark" href="#">Создать рассылку</a>
                 {% else %}
                 <a class="btn btn-sm btn-outline-dark" href="#">Создать пост</a>
