@@ -52,6 +52,20 @@
             </div>
             {% else %}
             {% client_form %}
+            <div class="row">
+                <p class="col-md-3 mb-0 text-body-secondary">&copy; {% now 'Y' %} Социальная сеть</p>
+                <a href="/"
+                   class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <ul class="nav col-md-3 justify-content-end">
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Главная</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQ</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">О нас</a></li>
+                </ul>
+            </div>
             {% endif %}
             {% endif %}
         </div>
