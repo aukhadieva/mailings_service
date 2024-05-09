@@ -14,11 +14,18 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+load_dotenv()
+
 # DB
 
-load_dotenv()
 PSQL_USER = os.getenv('PSQL_USER')
 PSQL_PASSWORD = os.getenv('PSQL_PASSWORD')
+
+# EMAIL_HOST
+
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -147,3 +154,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Users
 
 AUTH_USER_MODEL = 'users.User'
+
+# Email host
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
