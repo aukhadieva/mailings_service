@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="mx-auto" style="width: 400px;">
+    <div class="card">
+        <h5 class="card-header">Клиент</h5>
+        <div class="card-body">
+
+            <p class="card-text"><strong>ФИО:</strong> {{ object.full_name }} </p>
+            <p class="card-text"><strong>Контактный email:</strong> {{ object.email }} </p>
+            <p class="card-text"><strong>Комментарий:</strong>
+                {% if object.comment %}
+                {{ object.comment }}</p>
+            {% else %}
+            <em>отсутствует</em></p>
+            {% endif %}
+            <div class="group">
+                <a href="{% url 'mailing:edit_client' object.pk %}" class="btn btn-warning">Редактировать</a>
+                <a href="{% url 'mailing:delete_client' object.pk %}" class="btn btn-danger">Удалить</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

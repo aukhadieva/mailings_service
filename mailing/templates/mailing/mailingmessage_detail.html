@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="mx-auto" style="width: 400px;">
+    <div class="card">
+        <h5 class="card-header">Сообщение</h5>
+        <div class="card-body">
+            <p class="card-text"><strong>Тема письма:</strong> {{ object.title }} </p>
+            <p class="card-text"><strong>Тело письма:</strong> {{ object.body }} </p>
+            <div class="group">
+                <a href="{% url 'mailing:edit_message' object.pk %}" class="btn btn-warning">Редактировать</a>
+                <a href="{% url 'mailing:delete_message' object.pk %}" class="btn btn-danger">Удалить</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
