@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="mx-auto">
+    <h1>Список рассылок</h1>
+    <table class="table table-hover mt-5">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Наименование рассылки</th>
+            <th scope="col">Менеджер рассылки</th>
+            <th scope="col">Периодичность рассылки</th>
+            <th scope="col">Статус рассылки</th>
+            <th scope="col">Сообщение рассылки</th>
+            <th scope="col">Получатели рассылки</th>
+        </tr>
+        </thead>
+        {% for object in object_list %}
+        <tbody>
+        <tr>
+            <th scope="row">{{ object.pk }}</th>
+            <td><a href="{% url 'mailing:view_mailing' object.pk %}" class="nav-link px-2 text-body-dark">{{ object.title }}</a></td>
+            <td>{{ object.owner }}</td>
+            <td>{{ object.message }}</td>
+            <td>{{ object.period }}</td>
+            <td>{{ object.status }}</td>
+            <td>{{ object.target }}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

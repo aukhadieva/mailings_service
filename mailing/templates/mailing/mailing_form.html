@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="mx-auto" style="width: 900px;">
+    <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+        <form action="{% if object %}{% url 'mailing:edit_mailing' object.pk %}
+        {% else %}{% url 'mailing:create_mailing' %}{% endif %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12">
+                    <h5>Рассылка</h5>
+                    <p>Для создания рассылки заполните поля формы</p>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2 mb-2">
+                        <label for="form.title.id_for_label">Наименование рассылки:</label>
+                        {{ form.title }}
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2 mb-2">
+                        <label for="form.period.id_for_label"">Периодичность рассылки:</label>
+                        {{ form.period }}
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2 mb-2">
+                        <label for="form.status.id_for_label"">Статус рассылки:</label>
+                        {{ form.status }}
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2 mb-2">
+                        <label for="form.owner.id_for_label">Менеджер рассылки:</label>
+                        {{ form.owner }}
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2 mb-2">
+                        <label for="{{ form.message.id_for_label }}">Сообщение рассылки:</label>
+                        {{ form.message }}
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2 mb-4">
+                        <label for="form.target.id_for_label">Получатели рассылки:</label>
+                        {{ form.target }}
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2 mb-2">
+                        <button type="submit" class="btn btn btn-dark">
+                            {% if object %}
+                            Сохранить
+                            {% else %}
+                            Создать рассылку
+                            {% endif %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
