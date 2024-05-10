@@ -17,8 +17,8 @@
         <tbody>
         <tr>
             <th scope="row">{{ object.pk }}</th>
-            <td><a href="{% url 'mailing:view_message' object.pk %}" class="nav-link px-2 text-body-dark">{{
-                object.title }}</a></td>
+            <td><a href="{% url 'mailing:view_message' object.pk %}" class="nav-link px-2 text-body-dark">
+                {{ object.title }}</a></td>
             <td>{{ object.body }}</td>
         </tr>
         </tbody>
