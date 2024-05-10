@@ -1,6 +1,6 @@
 from django import forms
 
-from mailing.models import Client
+from mailing.models import Client, MailingMessage
 
 
 class ClientForm(forms.ModelForm):
@@ -17,3 +17,17 @@ class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = ('full_name', 'email', 'comment',)
+
+
+class MailingMessageForm(forms.ModelForm):
+    """
+    Форма сообщения для рассылки.
+    """
+    title = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control', 'placeholder': 'Тема письма'}))
+    body = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control py-5', 'placeholder': 'Тело письма'}))
+
+    class Meta:
+        model = MailingMessage
+        fields = ('title', 'body',)
