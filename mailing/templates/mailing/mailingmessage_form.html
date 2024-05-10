@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="mx-auto" style="width: 600px;">
+    <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+        <form action="{% if object %}{% url 'mailing:edit_message' object.pk %}
+        {% else %}{% url 'mailing:create_message' %}{% endif %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12">
+                    <h5>Сообщение рассылки</h5>
+                    <p>Для создания сообщения рассылки заполните поля формы</p>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2 mb-2">
+                        <label for="form.title.id_for_label" class="visually-hidden"></label>
+                        {{ form.title }}
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2 mb-4">
+                        <label for="{{ form.body.id_for_label }}" class="visually-hidden"></label>
+                        {{ form.body }}
+
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2 mb-2">
+                        <button type="submit" class="btn btn btn-dark">
+                            {% if object %}
+                            Сохранить
+                            {% else %}
+                            Создать сообщение
+                            {% endif %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
