@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
-from mailing.forms import ClientForm, MailingMessageForm
-from mailing.models import Client, MailingMessage
+from mailing.forms import ClientForm, MailingMessageForm, MailingForm
+from mailing.models import Client, MailingMessage, Mailing
 from utils import TitleMixin
 
 
@@ -75,3 +75,38 @@ class MailingMessageDeleteView(TitleMixin, DeleteView):
     model = MailingMessage
     success_url = reverse_lazy('mailing:message_list')
     title = 'Удаление сообщения'
+
+
+class MailingCreateView(TitleMixin, CreateView):
+    model = Mailing
+    form_class = MailingForm
+    success_url = reverse_lazy('mailing:mailing_list')
+    title = 'Создание рассылки'
+
+
+class MailingListView(TitleMixin, ListView):
+    model = Mailing
+    title = 'Список рассылок'
+
+
+class MailingDetailView(TitleMixin, DetailView):
+    model = Mailing
+
+    def get_title(self):
+        return self.object.title
+
+
+class MailingUpdateView(TitleMixin, UpdateView):
+    model = Mailing
+    form_class = MailingForm
+    title = 'Редактирование рассылки'
+
+    def get_success_url(self):
+        mailing = self.get_object()
+        return reverse('mailing:view_mailing', args=[mailing.pk])
+
+
+class MailingDeleteView(TitleMixin, DeleteView):
+    model = Mailing
+    success_url = reverse_lazy('mailing:mailing_list')
+    title = 'Удаление рассылки'
