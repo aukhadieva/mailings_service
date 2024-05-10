@@ -1,5 +1,7 @@
 {% extends 'main/base.html' %}
 
+{% block title %}{{ title }}{% endblock %}
+
 {% block content %}
 <div class="mx-auto" style="width: 400px;">
     <div class="card">
@@ -15,9 +17,8 @@
             <em>отсутствует</em></p>
             {% endif %}
             <div class="group">
-                <a href="#" class="btn btn-warning">Редактировать</a>
-
-                <a href="#" class="btn btn-danger">Удалить</a>
+                <a href="{% url 'mailing:edite_client' object.pk %}" class="btn btn-warning">Редактировать</a>
+                <a href="{% url 'mailing:delete_client' object.pk %}" class="btn btn-danger">Удалить</a>
             </div>
         </div>
     </div>
