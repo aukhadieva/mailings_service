@@ -29,3 +29,13 @@ class ClientDeleteView(TitleMixin, DeleteView):
     model = Client
     success_url = reverse_lazy('mailing:client_list')
     title = 'Удаление клиента'
+
+
+class ClientUpdateView(TitleMixin, UpdateView):
+    model = Client
+    form_class = ClientForm
+    title = 'Редактирование клиента'
+
+    def get_success_url(self):
+        client = self.get_object()
+        return reverse('mailing:view_client', args=[client.pk])
