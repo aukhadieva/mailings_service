@@ -23,3 +23,9 @@ class ClientDetailView(TitleMixin, DetailView):
 
     def get_title(self):
         return self.object.full_name
+
+
+class ClientDeleteView(TitleMixin, DeleteView):
+    model = Client
+    success_url = reverse_lazy('mailing:client_list')
+    title = 'Удаление клиента'
