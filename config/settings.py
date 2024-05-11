@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_crontab',
+
     'users',
     'main',
     'mailing'
@@ -162,3 +164,10 @@ EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+
+
+# Cron
+
+CRONJOBS = [
+    ('* * * * *', 'mailing.cron.send_mailing'),
+]

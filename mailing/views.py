@@ -3,7 +3,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 from mailing.forms import ClientForm, MailingMessageForm, MailingForm
-from mailing.models import Client, MailingMessage, Mailing
+from mailing.models import Client, MailingMessage, Mailing, MailingLog
 from utils import TitleMixin
 
 
@@ -110,3 +110,13 @@ class MailingDeleteView(TitleMixin, DeleteView):
     model = Mailing
     success_url = reverse_lazy('mailing:mailing_list')
     title = 'Удаление рассылки'
+
+
+class MailingLogListView(TitleMixin, ListView):
+    model = MailingLog
+    title = 'Логи рассылки'
+
+
+class MailingLogDetailView(TitleMixin, DetailView):
+    model = MailingLog
+    title = 'Логи рассылки'
