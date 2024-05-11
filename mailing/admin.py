@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from mailing.models import Client, MailingMessage, Mailing
+from mailing.models import Client, MailingMessage, Mailing, MailingLog
 
 
 @admin.register(Client)
@@ -20,3 +20,9 @@ class AdminMailing(admin.ModelAdmin):
     list_display = ('id', 'title', 'created_datetime', 'period', 'status', 'owner',)
     search_fields = ('title',)
     list_filter = ('created_datetime', 'period', 'status', 'owner',)
+
+
+@admin.register(MailingLog)
+class AdminMailing(admin.ModelAdmin):
+    list_display = ('id', 'datetime_last_attempt', 'status', 'server_response',)
+    list_filter = ('datetime_last_attempt', 'status', 'server_response', 'mailing_id',)
