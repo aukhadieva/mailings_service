@@ -8,7 +8,7 @@ NULLABLE = {'blank': True, 'null': True}
 class Client(models.Model):
     """Модель клиента, получающего рассылки."""
     full_name = models.CharField(max_length=500, verbose_name='Ф.И.О.')
-    email = models.EmailField(verbose_name='контактный email')
+    email = models.EmailField(verbose_name='контактный email', unique=True)
     comment = models.CharField(max_length=500, verbose_name='комментарий', **NULLABLE)
 
     def __str__(self):
@@ -34,11 +34,24 @@ class MailingMessage(models.Model):
 
 class Mailing(models.Model):
     """Модель рассылки."""
+    PERIOD_CHOICES = [
+        ('once', 'один раз'),
+        ('daily', 'ежедневно'),
+        ('weekly', 'еженедельно'),
+        ('monthly', 'ежемесячно'),
+    ]
+
+    STATUS_CHOICES = [
+        ('created', 'создана'),
+        ('completed', 'завершена'),
+        ('launched', 'запущена'),
+    ]
+
     owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='менеджер рассылки')
     title = models.CharField(max_length=300, verbose_name='название рассылки')
     created_datetime = models.DateTimeField(auto_now_add=True, verbose_name='дата и время первой отправки рассылки')
-    period = models.CharField(max_length=50, verbose_name='периодичность рассылки')
-    status = models.CharField(max_length=50, verbose_name='статус рассылки')
+    period = models.CharField(max_length=50, choices=PERIOD_CHOICES, default='', verbose_name='периодичность рассылки')
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='created', verbose_name='статус рассылки')
     target = models.ManyToManyField(Client, verbose_name='получатели рассылки')
     message = models.ForeignKey(MailingMessage, on_delete=models.CASCADE, verbose_name='сообщение рассылки')
 
