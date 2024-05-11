@@ -1,6 +1,6 @@
 from django import forms
 
-from mailing.models import Client, MailingMessage, Mailing
+from mailing.models import Client, MailingMessage, Mailing, MAILING_STATUS_CHOICES, PERIOD_CHOICES
 from users.models import User
 
 
@@ -41,10 +41,8 @@ class MailingForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control'}))
     owner = forms.ModelChoiceField(queryset=User.objects.all())
-    period = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control'}))
-    status = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control'}))
+    period = forms.CharField(widget=forms.Select(choices=PERIOD_CHOICES))
+    status = forms.CharField(widget=forms.Select(choices=MAILING_STATUS_CHOICES))
     target = forms.ModelMultipleChoiceField(queryset=Client.objects.all())
     message = forms.ModelChoiceField(queryset=MailingMessage.objects.all())
 
