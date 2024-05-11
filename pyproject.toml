@@ -12,6 +12,8 @@ psycopg2-binary = "^2.9.9"
 python-dotenv = "^1.0.1"
 ipython = "^8.24.0"
 pillow = "^10.3.0"
+django-crontab = "^0.7.1"
+pytz = "^2024.1"
 
 
 [build-system]
