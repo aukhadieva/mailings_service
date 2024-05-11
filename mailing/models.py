@@ -61,3 +61,23 @@ class Mailing(models.Model):
     class Meta:
         verbose_name = 'рассылка'
         verbose_name_plural = 'рассылки'
+
+
+class MailingLog(models.Model):
+    """Модель логов рассылки."""
+    STATUS_CHOICES = [
+        ('success', 'успешно'),
+        ('fail', 'неуспешно'),
+    ]
+
+    datetime_last_attempt = models.DateTimeField(auto_now=True, editable=False, verbose_name='дата и время последней попытки')
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='', verbose_name='статус попытки')
+    server_response = models.CharField(max_length=500, verbose_name='ответ почтового сервера', **NULLABLE)
+    mailing_id = models.ForeignKey(Mailing, on_delete=models.CASCADE, verbose_name='рассылка')
+
+    def __str__(self):
+        return self.status
+
+    class Meta:
+        verbose_name = 'попытка'
+        verbose_name_plural = 'попытки'
