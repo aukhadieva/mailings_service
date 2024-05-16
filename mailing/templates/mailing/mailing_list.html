@@ -24,9 +24,13 @@
             <td><a href="{% url 'mailing:view_mailing' object.pk %}" class="nav-link px-2 text-body-dark">{{ object.title }}</a></td>
             <td>{{ object.owner }}</td>
             <td>{{ object.message }}</td>
-            <td>{{ object.period }}</td>
-            <td>{{ object.status }}</td>
-            <td>{{ object.target }}</td>
+            <td>{{ object.get_period_display }}</td>
+            <td>{{ object.get_status_display }}</td>
+            <td>
+                {% for client in object.target.all %}
+                {{ client }} <br>
+                {% endfor %}
+            </td>
         </tr>
         </tbody>
         {% endfor %}

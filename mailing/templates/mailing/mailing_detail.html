@@ -10,7 +10,7 @@
             <p class="card-text"><strong>Наименование рассылки:</strong> {{ object.title }} </p>
             <p class="card-text"><strong>Менеджер рассылки:</strong> {{ object.owner }} </p>
             <p class="card-text"><strong>Сообщение рассылки:</strong> {{ object.message }} </p>
-            <p class="card-text"><strong>Получатели рассылки:</strong> {{ object.target }} </p>
+            <p class="card-text"><strong>Получатели рассылки:</strong> {% for client in object.target.all %} {{ client }} <br> {% endfor %} </p>
             <p class="card-text"><strong>Периодичность рассылки:</strong> {{ object.period }} </p>
             <p class="card-text"><strong>Дата и время первой отправки рассылки:</strong> {{ object.created_datetime }}
             </p>
