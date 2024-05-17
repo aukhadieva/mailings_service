@@ -52,7 +52,7 @@ class Mailing(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='менеджер рассылки')
     title = models.CharField(max_length=300, verbose_name='название рассылки')
     created_datetime = models.DateTimeField(auto_now_add=True, verbose_name='дата и время первой отправки рассылки')
-    period = models.CharField(max_length=50, choices=PERIOD_CHOICES, default='', verbose_name='периодичность рассылки')
+    period = models.CharField(max_length=50, choices=PERIOD_CHOICES, verbose_name='периодичность рассылки')
     status = models.CharField(max_length=50, choices=MAILING_STATUS_CHOICES, default='created',
                               verbose_name='статус рассылки')
     target = models.ManyToManyField(Client, verbose_name='получатели рассылки')
