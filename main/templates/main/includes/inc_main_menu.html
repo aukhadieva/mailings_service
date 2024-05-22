@@ -25,7 +25,7 @@
             </div>
             <div class="col-4 text-center">
                 <a class="blog-header-logo text-body-emphasis text-decoration-none" href="{% url 'main:index' %}"><img
-                    src="{% static 'images/logo.png' %}" alt="logo" width="60" height="54"></a>
+                        src="{% static 'images/logo.png' %}" alt="logo" width="60" height="54"></a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 <a class="link-secondary" href="#" aria-label="Search">
@@ -40,7 +40,8 @@
                     {% if user.is_authenticated %}
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <img src="{% static 'images/default_avatar.jpg' %}" alt="mdo" width="32" height="32"
+                             class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small" style="">
                         <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
@@ -50,17 +51,22 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="{% url 'admin:index' %}">Админпанель</a></li>
-                        <li><a class="dropdown-item" href="{% url 'mailing:client_list' %}">Список клиентов</a></li>
-                        <li><a class="dropdown-item" href="{% url 'mailing:message_list' %}">Список сообщений</a></li>
-                        <li><a class="dropdown-item" href="{% url 'mailing:mailing_list' %}">Список рассылок</a></li>
+                        <li><a class="dropdown-item" href="{% url 'mailing:client_list' %}">Клиенты</a></li>
+                        <li><a class="dropdown-item" href="{% url 'mailing:message_list' %}">Письма</a></li>
+                        <li><a class="dropdown-item" href="{% url 'mailing:mailing_list' %}">Рассылки</a></li>
                         <li><a class="dropdown-item" href="{% url 'mailing:mailinglogs_list' %}">Логи рассылок</a></li>
                         {% endif %}
                         <li>
-                            <hr class="dropdown-divider">
+                            <!--                            <hr class="dropdown-divider">-->
                         </li>
-                        <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
+                        <div class="container mt-2">
+                            <form action="{% url 'users:logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-light">Выйти</button>
+                            </form>
+                        </div>
                         {% else %}
-                        <a class="btn btn-sm btn-success" href="{% url 'users:sign_in' %}">Войти</a>
+                        <a class="btn btn-sm btn-success" href="{% url 'users:login' %}">Войти</a>
                         {% endif %}
                     </ul>
                 </div>
