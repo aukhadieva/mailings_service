@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
@@ -14,109 +14,125 @@ class ClientCreateView(TitleMixin, CreateView):
     title = 'Создание клиента'
 
 
-class ClientListView(TitleMixin, ListView):
+class ClientListView(TitleMixin, LoginRequiredMixin, ListView):
     model = Client
     title = 'Список клиентов'
+    login_url = reverse_lazy('users:login')
 
 
-class ClientDetailView(TitleMixin, DetailView):
+class ClientDetailView(TitleMixin, LoginRequiredMixin, DetailView):
     model = Client
+    login_url = reverse_lazy('users:login')
 
     def get_title(self):
         return self.object.full_name
 
 
-class ClientDeleteView(TitleMixin, DeleteView):
+class ClientDeleteView(TitleMixin, LoginRequiredMixin, DeleteView):
     model = Client
     success_url = reverse_lazy('mailing:client_list')
     title = 'Удаление клиента'
+    login_url = reverse_lazy('users:login')
 
 
-class ClientUpdateView(TitleMixin, UpdateView):
+class ClientUpdateView(TitleMixin, LoginRequiredMixin, UpdateView):
     model = Client
     form_class = ClientForm
     title = 'Редактирование клиента'
+    login_url = reverse_lazy('users:login')
 
     def get_success_url(self):
         client = self.get_object()
         return reverse('mailing:view_client', args=[client.pk])
 
 
-class MailingMessageCreateView(TitleMixin, CreateView):
+class MailingMessageCreateView(TitleMixin, LoginRequiredMixin, CreateView):
     model = MailingMessage
     form_class = MailingMessageForm
     success_url = reverse_lazy('mailing:message_list')
     title = 'Создание сообщения'
+    login_url = reverse_lazy('users:login')
 
 
-class MailingMessageListView(TitleMixin, ListView):
+class MailingMessageListView(TitleMixin, LoginRequiredMixin, ListView):
     model = MailingMessage
     title = 'Список сообщений'
+    login_url = reverse_lazy('users:login')
 
 
-class MailingMessageDetailView(TitleMixin, DetailView):
+class MailingMessageDetailView(TitleMixin, LoginRequiredMixin, DetailView):
     model = MailingMessage
+    login_url = reverse_lazy('users:login')
 
     def get_title(self):
         return self.object.title
 
 
-class MailingMessageUpdateView(TitleMixin, UpdateView):
+class MailingMessageUpdateView(TitleMixin, LoginRequiredMixin, UpdateView):
     model = MailingMessage
     form_class = MailingMessageForm
     title = 'Редактирование сообщения'
+    login_url = reverse_lazy('users:login')
 
     def get_success_url(self):
         message = self.get_object()
         return reverse('mailing:view_message', args=[message.pk])
 
 
-class MailingMessageDeleteView(TitleMixin, DeleteView):
+class MailingMessageDeleteView(TitleMixin, LoginRequiredMixin, DeleteView):
     model = MailingMessage
     success_url = reverse_lazy('mailing:message_list')
     title = 'Удаление сообщения'
+    login_url = reverse_lazy('users:login')
 
 
-class MailingCreateView(TitleMixin, CreateView):
+class MailingCreateView(TitleMixin, LoginRequiredMixin, CreateView):
     model = Mailing
     form_class = MailingForm
     success_url = reverse_lazy('mailing:mailing_list')
     title = 'Создание рассылки'
+    login_url = reverse_lazy('users:login')
 
 
-class MailingListView(TitleMixin, ListView):
+class MailingListView(TitleMixin, LoginRequiredMixin, ListView):
     model = Mailing
     title = 'Список рассылок'
+    login_url = reverse_lazy('users:login')
 
 
-class MailingDetailView(TitleMixin, DetailView):
+class MailingDetailView(TitleMixin, LoginRequiredMixin, DetailView):
     model = Mailing
+    login_url = reverse_lazy('users:login')
 
     def get_title(self):
         return self.object.title
 
 
-class MailingUpdateView(TitleMixin, UpdateView):
+class MailingUpdateView(TitleMixin, LoginRequiredMixin, UpdateView):
     model = Mailing
     form_class = MailingForm
     title = 'Редактирование рассылки'
+    login_url = reverse_lazy('users:login')
 
     def get_success_url(self):
         mailing = self.get_object()
         return reverse('mailing:view_mailing', args=[mailing.pk])
 
 
-class MailingDeleteView(TitleMixin, DeleteView):
+class MailingDeleteView(TitleMixin, LoginRequiredMixin, DeleteView):
     model = Mailing
     success_url = reverse_lazy('mailing:mailing_list')
     title = 'Удаление рассылки'
+    login_url = reverse_lazy('users:login')
 
 
-class MailingLogListView(TitleMixin, ListView):
+class MailingLogListView(TitleMixin, LoginRequiredMixin, ListView):
     model = MailingLog
     title = 'Логи рассылки'
+    login_url = reverse_lazy('users:login')
 
 
-class MailingLogDetailView(TitleMixin, DetailView):
+class MailingLogDetailView(TitleMixin, LoginRequiredMixin, DetailView):
     model = MailingLog
     title = 'Логи рассылки'
+    login_url = reverse_lazy('users:login')
