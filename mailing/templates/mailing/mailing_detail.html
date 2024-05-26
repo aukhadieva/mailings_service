@@ -11,10 +11,10 @@
             <p class="card-text"><strong>Менеджер рассылки:</strong> {{ object.owner }} </p>
             <p class="card-text"><strong>Сообщение рассылки:</strong> {{ object.message }} </p>
             <p class="card-text"><strong>Получатели рассылки:</strong> {% for client in object.target.all %} {{ client }} <br> {% endfor %} </p>
-            <p class="card-text"><strong>Периодичность рассылки:</strong> {{ object.period }} </p>
+            <p class="card-text"><strong>Периодичность рассылки:</strong> {{ object.get_period_display }} </p>
             <p class="card-text"><strong>Дата и время первой отправки рассылки:</strong> {{ object.created_datetime }}
             </p>
-            <p class="card-text"><strong>Статус рассылки:</strong> {{ object.status }} </p>
+            <p class="card-text"><strong>Статус рассылки:</strong> {{ object.get_status_display }} </p>
             <div class="group">
                 <a href="{% url 'mailing:edit_mailing' object.pk %}" class="btn btn-warning">Редактировать</a>
                 <a href="{% url 'mailing:delete_mailing' object.pk %}" class="btn btn-danger">Удалить</a>
