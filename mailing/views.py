@@ -93,6 +93,15 @@ class MailingCreateView(TitleMixin, LoginRequiredMixin, PermissionRequiredMixin,
     title = 'Создание рассылки'
     permission_required = 'mailing.add_mailing'
 
+    def form_valid(self, form):
+        """
+        Привязывает рассылку к текущему пользователю.
+        """
+        mailing = form.save()
+        mailing.owner = self.request.user
+        mailing.save()
+        return super().form_valid(form)
+
 
 class MailingListView(TitleMixin, LoginRequiredMixin, ListView):
     model = Mailing
