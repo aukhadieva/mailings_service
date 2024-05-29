@@ -32,3 +32,13 @@ class MailingForm(StyleMixin, forms.ModelForm):
     class Meta:
         model = Mailing
         fields = ('title', 'owner', 'period', 'status', 'target', 'message',)
+
+
+class ModeratorMailingForm(StyleMixin, forms.ModelForm):
+    """
+    Форма для модератора рассылки.
+    """
+
+    class Meta:
+        model = Mailing
+        fields = ('status',)
