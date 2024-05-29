@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, TemplateView
@@ -23,7 +24,7 @@ class UserRegisterView(TitleMixin, CreateView):
     title = 'Регистрация'
 
 
-class UserProfileView(TitleMixin, UpdateView):
+class UserProfileView(LoginRequiredMixin, TitleMixin, UpdateView):
     model = User
     form_class = UserProfileForm
     success_url = reverse_lazy('users:profile')
