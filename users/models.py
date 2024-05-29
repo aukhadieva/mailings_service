@@ -17,3 +17,16 @@ class User(AbstractUser):
     )
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+
+class EmailVerification(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='пользователь')
+    key = models.UUIDField(unique=True, verbose_name='ключ')
+    created_at = models.DateTimeField(auto_now_add=True, editable=False, verbose_name='дата генерации ключа')
+    expiration = models.DateTimeField(verbose_name='срок действия ключа')
+
+    def __str__(self):
+        return f'подтверждение электронной почты для {self.user}'
+
+    class Meta:
+        verbose_name = 'подтверждение электронной почты'
