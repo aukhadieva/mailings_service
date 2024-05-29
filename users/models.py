@@ -23,6 +23,11 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    class Meta:
+        permissions = [
+            ('change_is_active_status', 'Can change user`s status'),
+        ]
+
 
 class EmailVerification(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='пользователь')
