@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
 from users.models import User
@@ -11,7 +12,7 @@ class UserLoginForm(StyleMixin, AuthenticationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'password',)
+        fields = ('email', 'password',)
 
 
 class UserRegistrationForm(StyleMixin, UserCreationForm):
@@ -21,7 +22,7 @@ class UserRegistrationForm(StyleMixin, UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2',)
+        fields = ('email', 'password1', 'password2',)
 
 
 class UserProfileForm(StyleMixin, UserChangeForm):
@@ -29,6 +30,10 @@ class UserProfileForm(StyleMixin, UserChangeForm):
     Форма для профиля пользователя.
     """
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password'].widget = forms.HiddenInput()
+
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'image', 'username', 'email',)
+        fields = ('first_name', 'last_name', 'image', 'email',)
