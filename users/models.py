@@ -1,6 +1,11 @@
+from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+
+from config.settings import DOMAIN_NAME, EMAIL_HOST_USER
 
 
 class User(AbstractUser):
@@ -30,3 +35,25 @@ class EmailVerification(models.Model):
 
     class Meta:
         verbose_name = 'подтверждение электронной почты'
+
+    def send_verification_email(self):
+        """
+        Отправляет электронное письмо с ключом подтверждения эл. почты.
+        """
+        link = reverse('users:verify', kwargs={'email': self.user.email, 'key': self.key})
+        verification_link = f'{DOMAIN_NAME}{link}'
+        subject = f'Подтверждение учетной записи'
+        message = f'Для подтверждения регистрации пройдите по ссылке:\n {verification_link}'
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=EMAIL_HOST_USER,
+            recipient_list=[self.user.email],
+            fail_silently=False,
+        )
+
+    def is_expired(self):
+        """
+        Проверяет, истек ли срок действия ключа.
+        """
+        return True if now() >= self.expiration else False
