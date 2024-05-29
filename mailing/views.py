@@ -106,11 +106,10 @@ class MailingDetailView(TitleMixin, LoginRequiredMixin, DetailView):
         return self.object.title
 
 
-class MailingUpdateView(TitleMixin, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class MailingUpdateView(TitleMixin, LoginRequiredMixin, UpdateView):
     model = Mailing
     form_class = MailingForm
     title = 'Редактирование рассылки'
-    permission_required = 'mailing.edit_mailing'
 
     def get_success_url(self):
         mailing = self.get_object()
