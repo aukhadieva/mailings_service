@@ -5,7 +5,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, ListView, D
 
 from mailing.forms import ClientForm, MailingMessageForm, MailingForm, ModeratorMailingForm
 from mailing.models import Client, MailingMessage, Mailing, MailingLog
-from utils import TitleMixin
+from common.mixins import TitleMixin
 
 
 class ClientCreateView(TitleMixin, PermissionRequiredMixin, CreateView):

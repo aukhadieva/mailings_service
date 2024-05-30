@@ -1,8 +1,8 @@
 from django.views.generic import TemplateView
 
 from blog.models import BlogPost
+from common.mixins import TitleMixin
 from mailing.models import Mailing, Client
-from utils import TitleMixin
 
 
 class MainTemplateView(TitleMixin, TemplateView):

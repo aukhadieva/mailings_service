@@ -7,7 +7,7 @@ from django.shortcuts import HttpResponseRedirect
 
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from users.models import User, EmailVerification
-from utils import TitleMixin
+from common.mixins import TitleMixin
 
 
 class UserLoginView(TitleMixin, LoginView):

@@ -1,7 +1,7 @@
 from django import forms
 
 from mailing.models import Client, MailingMessage, Mailing
-from utils import StyleMixin
+from common.mixins import StyleMixin
 
 
 class ClientForm(StyleMixin, forms.ModelForm):

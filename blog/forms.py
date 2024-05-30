@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 
 from blog.models import BlogPost
-from utils import StyleMixin
+from common.mixins import StyleMixin
 
 
 class BlogPostForm(StyleMixin, ModelForm):

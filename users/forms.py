@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django.utils.timezone import now
 
 from users.models import User, EmailVerification
-from utils import StyleMixin
+from common.mixins import StyleMixin
 
 
 class UserLoginForm(StyleMixin, AuthenticationForm):
