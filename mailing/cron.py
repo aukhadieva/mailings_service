@@ -14,7 +14,7 @@ def send_mailing():
     zone = pytz.timezone(settings.TIME_ZONE)
     current_datetime = datetime.now(zone)
 
-    mailings = Mailing.objects.filter(created_datetime__lte=current_datetime).filter(status__in=['created'])
+    mailings = Mailing.objects.filter(created_datetime__lte=current_datetime).filter(status__in=['created', 'launched'])
 
     for mailing in mailings:
 
@@ -35,25 +35,25 @@ def send_mailing():
 
             if server_response == 1:
                 success_msg = 'письмо отправлено'
-            MailingLog.objects.create(status=LOGS_STATUS_CHOICES[0][1], server_response=success_msg, mailing_id=mailing)
+                MailingLog.objects.create(status=LOGS_STATUS_CHOICES[0][1], server_response=success_msg, mailing_id=mailing)
 
-            if mailing.period == 'once' and server_response == 1:
-                mailing.created_datetime = current_datetime
-                mailing.status = 'completed'
+                if mailing.period == 'once':
+                    mailing.created_datetime = current_datetime
+                    mailing.status = 'completed'
 
-            elif mailing.period == 'daily' and server_response == 1:
-                current_datetime = Mailing.objects.get(period='daily')
-                mailing.created_datetime = current_datetime.created_datetime + timedelta(days=1)
+                elif mailing.period == 'daily':
+                    current_datetime = Mailing.objects.get(period='daily')
+                    mailing.created_datetime = current_datetime.created_datetime + timedelta(days=1)
 
-            elif mailing.period == 'weekly' and server_response == 1:
-                current_datetime = Mailing.objects.get(period='weekly')
-                mailing.created_datetime = current_datetime.created_datetime + timedelta(days=7)
+                elif mailing.period == 'weekly':
+                    current_datetime = Mailing.objects.get(period='weekly')
+                    mailing.created_datetime = current_datetime.created_datetime + timedelta(days=7)
 
-            elif mailing.period == 'monthly' and server_response == 1:
-                current_datetime = Mailing.objects.get(period='monthly')
-                mailing.created_datetime = current_datetime.created_datetime + relativedelta(months=1)
+                elif mailing.period == 'monthly':
+                    current_datetime = Mailing.objects.get(period='monthly')
+                    mailing.created_datetime = current_datetime.created_datetime + relativedelta(months=1)
 
-            mailing.save()
+                mailing.save()
 
         except smtplib.SMTPException as error:
             MailingLog.objects.create(status=LOGS_STATUS_CHOICES[1][1], server_response=error, mailing_id=mailing)
