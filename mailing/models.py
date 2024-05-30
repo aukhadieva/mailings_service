@@ -22,6 +22,7 @@ MAILING_STATUS_CHOICES = [
 
 class Client(models.Model):
     """Модель клиента, получающего рассылки."""
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='менеджер рассылки', **NULLABLE)
     full_name = models.CharField(max_length=500, verbose_name='Ф.И.О.')
     email = models.EmailField(verbose_name='контактный email', unique=True)
     comment = models.CharField(max_length=500, verbose_name='комментарий', **NULLABLE)
@@ -36,6 +37,7 @@ class Client(models.Model):
 
 class MailingMessage(models.Model):
     """Модель письма в рассылке."""
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='менеджер рассылки', **NULLABLE)
     title = models.CharField(max_length=150, verbose_name='тема письма')
     body = models.TextField(verbose_name='тело письма')
 
