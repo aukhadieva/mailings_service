@@ -4,7 +4,7 @@ from users.models import User
 
 
 class BlogPost(models.Model):
-    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='контент-менеджер')
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='контент-менеджер', blank=True, null=True)
     title = models.CharField(max_length=150, verbose_name='заголовок')
     body = models.TextField(verbose_name='содержимое статьи')
     image = models.ImageField(upload_to='blog/', verbose_name='изображение', blank=True, null=True)
