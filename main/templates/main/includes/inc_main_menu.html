@@ -3,25 +3,28 @@
 <div class="container">
     <header class="border-bottom lh-1 py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
+
             <div class="col-4 pt-1">
-                {% if user.is_authenticated %}
-                {% if user.is_superuser or user.is_staff %}
+
                 <div class="dropdown">
+                    <a href="#" class="btn btn-sm btn-outline-dark" type="button">Блог</a>
+                    {% if user.is_authenticated %}
+                    {% if user.is_superuser or not perms.mailing.change_mailing_status and not perms.add_blogpost %}
                     <button class="btn btn-sm btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                         Создать...
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'mailing:create_client' %}">Создать клиента</a></li>
-                        <li><a class="dropdown-item" href="{% url 'mailing:create_message' %}">Создать сообщение</a>
-                        </li>
+                        <li><a class="dropdown-item" href="{% url 'mailing:create_message' %}">Создать сообщение</a></li>
                         <li><a class="dropdown-item" href="{% url 'mailing:create_mailing' %}">Создать рассылку</a></li>
+                        {% if perms.add_blogpost %}
+                        <li><a class="dropdown-item" href="#">Создать пост</a></li>
+                        {% endif %}
                     </ul>
+                    {% endif %}
+                    {% endif %}
                 </div>
-                {% else %}
-                <a class="btn btn-sm btn-outline-dark" href="#">Создать пост</a>
-                {% endif %}
-                {% endif %}
             </div>
             <div class="col-4 text-center">
                 <a class="blog-header-logo text-body-emphasis text-decoration-none" href="{% url 'main:index' %}"><img
@@ -45,15 +48,18 @@
                     </a>
                     <ul class="dropdown-menu text-small" style="">
                         <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
-                        <li><a class="dropdown-item" href="{% url 'users:profile' %}">Настройки</a></li>
-                        {% if user.is_superuser or user.is_staff %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
+                        {% if user.is_superuser or user.is_staff %}
                         <li><a class="dropdown-item" href="{% url 'admin:index' %}">Админпанель</a></li>
+                        {% endif %}
+                        {% if perms.mailing.change_mailing_status or perms.mailing.change_mailing %}
                         <li><a class="dropdown-item" href="{% url 'mailing:client_list' %}">Клиенты</a></li>
-                        <li><a class="dropdown-item" href="{% url 'mailing:message_list' %}">Письма</a></li>
                         <li><a class="dropdown-item" href="{% url 'mailing:mailing_list' %}">Рассылки</a></li>
+                        {% endif %}
+                        {% if perms.mailing.change_mailing %}
+                        <li><a class="dropdown-item" href="{% url 'mailing:message_list' %}">Письма</a></li>
                         <li><a class="dropdown-item" href="{% url 'mailing:mailinglogs_list' %}">Логи рассылок</a></li>
                         {% endif %}
                         <li>

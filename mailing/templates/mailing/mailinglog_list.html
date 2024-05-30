@@ -16,6 +16,7 @@
         </tr>
         </thead>
         {% for object in object_list %}
+        {% if user == object.mailing_id.owner or user.is_superuser %}
         <tbody>
         <tr>
             <th scope="row">{{ object.pk }}</th>
@@ -25,6 +26,7 @@
             <td>{{ object.mailing_id }}</td>
         </tr>
         </tbody>
+        {% endif %}
         {% endfor %}
     </table>
 </div>

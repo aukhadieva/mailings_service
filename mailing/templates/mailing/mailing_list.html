@@ -18,6 +18,7 @@
         </tr>
         </thead>
         {% for object in object_list %}
+        {% if user == object.owner or user.is_superuser or perms.mailing.change_mailing_status %}
         <tbody>
         <tr>
             <th scope="row">{{ object.pk }}</th>
@@ -33,6 +34,7 @@
             </td>
         </tr>
         </tbody>
+        {% endif %}
         {% endfor %}
     </table>
 </div>

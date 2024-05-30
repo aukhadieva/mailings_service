@@ -8,7 +8,7 @@
         <h5 class="card-header">Рассылка "{{ object.mailing_id }}"</h5>
         <div class="card-body">
 
-            <p class="card-text"><strong>Дата и время последней попытки:</strong> {{ object.datetime_last_attempt }} </p>
+            <p class="card-text"><strong>Дата и время последней попытки:</strong>{{ object.datetime_last_attempt }}</p>
             <p class="card-text"><strong>Статус попытки:</strong> {{ object.status }} </p>
             <p class="card-text"><strong>Ответ почтового сервера:</strong>
                 {% if object.server_response %}

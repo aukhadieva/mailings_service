@@ -16,10 +16,12 @@
             {% else %}
             <em>отсутствует</em></p>
             {% endif %}
+            {% if user == object.owner or user.is_superuser %}
             <div class="group">
                 <a href="{% url 'mailing:edit_client' object.pk %}" class="btn btn-warning">Редактировать</a>
                 <a href="{% url 'mailing:delete_client' object.pk %}" class="btn btn-danger">Удалить</a>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
