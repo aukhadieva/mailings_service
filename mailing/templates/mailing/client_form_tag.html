@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+<div class="p-4  mb-4 rounded text-body-emphasis bg-body-tertiary">
     <form action="{% url 'mailing:create_client' %}" method="post">
         {% csrf_token %}
         <div class="row">
