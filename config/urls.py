@@ -10,4 +10,4 @@ urlpatterns = [
     path('', include('main.urls', namespace='main')),
     path('mailing/', include('mailing.urls', namespace='mailing')),
     path('blog/', include('blog.urls', namespace='blog'))
-] + static(settings.MEDIA_URL, document_url=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
