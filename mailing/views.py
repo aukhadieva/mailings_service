@@ -15,6 +15,15 @@ class ClientCreateView(TitleMixin, PermissionRequiredMixin, CreateView):
     title = 'Создание клиента'
     permission_required = 'mailing.add_client'
 
+    def form_valid(self, form):
+        """
+        Привязывает клиента к текущему пользователю.
+        """
+        client = form.save()
+        client.owner = self.request.user
+        client.save()
+        return super().form_valid(form)
+
 
 class ClientListView(TitleMixin, LoginRequiredMixin, ListView):
     model = Client
@@ -39,7 +48,7 @@ class ClientUpdateView(TitleMixin, LoginRequiredMixin, PermissionRequiredMixin, 
     model = Client
     form_class = ClientForm
     title = 'Редактирование клиента'
-    permission_required = 'mailing.edit_client'
+    permission_required = 'mailing.change_client'
 
     def get_success_url(self):
         client = self.get_object()
@@ -53,16 +62,24 @@ class MailingMessageCreateView(TitleMixin, LoginRequiredMixin, PermissionRequire
     title = 'Создание сообщения'
     permission_required = 'mailing.add_mailingmessage'
 
+    def form_valid(self, form):
+        """
+        Привязывает сообщение к текущему пользователю.
+        """
+        mailingmessage = form.save()
+        mailingmessage.owner = self.request.user
+        mailingmessage.save()
+        return super().form_valid(form)
 
-class MailingMessageListView(TitleMixin, LoginRequiredMixin, ListView):
+
+class MailingMessageListView(TitleMixin, LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = MailingMessage
     title = 'Список сообщений'
-    login_url = reverse_lazy('users:login')
+    permission_required = 'mailing.view_mailingmessage'
 
 
 class MailingMessageDetailView(TitleMixin, LoginRequiredMixin, DetailView):
     model = MailingMessage
-    login_url = reverse_lazy('users:login')
 
     def get_title(self):
         return self.object.title
@@ -72,7 +89,7 @@ class MailingMessageUpdateView(TitleMixin, LoginRequiredMixin, PermissionRequire
     model = MailingMessage
     form_class = MailingMessageForm
     title = 'Редактирование сообщения'
-    permission_required = 'mailing.edit_mailingmessage'
+    permission_required = 'mailing.change_mailingmessage'
 
     def get_success_url(self):
         message = self.get_object()
