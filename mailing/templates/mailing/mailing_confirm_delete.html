@@ -1,7 +1,6 @@
 {% extends 'main/base.html' %}
 
 {% block title %}{{ title }}{% endblock %}
-
 {% block content %}
 <div class="mx-auto" style="width: 400px;">
     <div class="col-12">
@@ -10,7 +9,7 @@
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
-                        <p>Хотите удалить сообщение "{{ object.title }}"?</p>
+                        <p>Хотите удалить рассылку "{{ object.title }}"?</p>
                         <button type="submit" class="btn btn-danger">Подтвердить</button>
                         <a href="{% url 'mailing:message_list' %}" class="btn btn-warning">Отмена</a>
                     </form>
