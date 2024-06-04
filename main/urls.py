@@ -7,5 +7,5 @@ from main.views import MainTemplateView
 app_name = MainConfig.name
 
 urlpatterns = [
-    path('', cache_page(60)(MainTemplateView.as_view()), name='home_page')
+    path('', MainTemplateView.as_view(), name='home_page')
 ]
