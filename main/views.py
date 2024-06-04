@@ -1,8 +1,8 @@
 from django.views.generic import TemplateView
 
-from blog.models import BlogPost
 from common.mixins import TitleMixin
 from mailing.models import Mailing, Client
+from main.services import get_posts_from_cache
 
 
 class MainTemplateView(TitleMixin, TemplateView):
@@ -15,7 +15,7 @@ class MainTemplateView(TitleMixin, TemplateView):
         """
         context_data = super().get_context_data(**kwargs)
 
-        context_data['posts'] = BlogPost.objects.filter(is_published=True)[:4]
+        context_data['posts'] = get_posts_from_cache()
 
         mailings = Mailing.objects.all()
         context_data['mailings'] = len(mailings)
