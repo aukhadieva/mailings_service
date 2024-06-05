@@ -38,10 +38,9 @@ class BlogPostUpdateView(TitleMixin, LoginRequiredMixin, PermissionRequiredMixin
         return reverse_lazy('blog:view_post', args=[post.pk])
 
 
-class BlogPostDeleteView(TitleMixin, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class BlogPostDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = BlogPost
     success_url = reverse_lazy('main:home_page')
-    title = 'Удаление поста'
     permission_required = 'blog.delete_blogpost'
 
 

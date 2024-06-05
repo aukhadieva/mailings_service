@@ -37,10 +37,9 @@ class ClientDetailView(TitleMixin, LoginRequiredMixin, DetailView):
         return self.object.full_name
 
 
-class ClientDeleteView(TitleMixin, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class ClientDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Client
     success_url = reverse_lazy('mailing:client_list')
-    title = 'Удаление клиента'
     permission_required = 'mailing.delete_client'
 
 
@@ -96,10 +95,9 @@ class MailingMessageUpdateView(TitleMixin, LoginRequiredMixin, PermissionRequire
         return reverse('mailing:view_message', args=[message.pk])
 
 
-class MailingMessageDeleteView(TitleMixin, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class MailingMessageDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = MailingMessage
     success_url = reverse_lazy('mailing:message_list')
-    title = 'Удаление сообщения'
     permission_required = 'mailing.delete_mailingmessage'
 
 
@@ -153,10 +151,9 @@ class MailingUpdateView(TitleMixin, LoginRequiredMixin, UpdateView):
         raise PermissionDenied
 
 
-class MailingDeleteView(TitleMixin, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class MailingDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Mailing
     success_url = reverse_lazy('mailing:mailing_list')
-    title = 'Удаление рассылки'
     permission_required = 'mailing.delete_mailing'
 
 
