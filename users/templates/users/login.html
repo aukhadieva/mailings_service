@@ -3,7 +3,7 @@
 
 {% block content %}
 <main>
-    <div class="container">
+    <div class="container mb-5">
         <div class="row justify-content-center">
             <div class="col-lg-5">
                 {% if messages or form.non_field_errors %}
@@ -33,15 +33,15 @@
                         <form method="post">
                             {% csrf_token %}
                             {{ form.as_p }}
-
                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                <a class="small" href="#">Забыли пароль?</a>
-                                <input class="btn btn-primary" type="submit" value="Авторизоваться">
+                                <a class="text-body-secondary small" href="{% url 'users:reset_password' %}">Забыли пароль?</a>
+                                <input class="btn btn-dark" type="submit" value="Авторизоваться">
                             </div>
                         </form>
                     </div>
                     <div class="card-footer text-center">
-                        <div class="small"><a href="{% url 'users:register' %}">Нужен аккаунт?
+                        <div><a class="text-body-secondary small" href="{% url 'users:register' %}">
+                            Нужен аккаунт?
                             Зарегистрируйся!</a></div>
                     </div>
                 </div>

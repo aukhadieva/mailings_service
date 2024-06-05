@@ -3,7 +3,7 @@
 
 {% block content %}
 <main>
-    <div class="container">
+    <div class="container mb-5">
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 {% if form.errors %}
@@ -23,13 +23,13 @@
                             {% csrf_token %}
                             {{ form.as_p }}
                             <div class="form-group mt-4 mb-0">
-                                <input class="btn btn-primary btn-block" type="submit" value="Создать аккаунт">
+                                <input class="btn btn-dark btn-block" type="submit" value="Создать аккаунт">
                             </div>
                         </form>
                     </div>
                     <div class="card-footer text-center">
                         <div class="small">
-                            <a href="{% url 'users:login' %}">
+                            <a class="text-body-secondary" href="{% url 'users:login' %}">
                                 Уже есть аккаунт? Авторизоваться
                             </a>
                         </div>
