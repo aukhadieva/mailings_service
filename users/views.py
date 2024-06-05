@@ -1,10 +1,16 @@
+import secrets
+
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
 from django.contrib.auth.views import LoginView
+from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, TemplateView
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect, render
 
+from config.settings import DOMAIN_NAME, EMAIL_HOST_USER
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from users.models import User, EmailVerification
 from common.mixins import TitleMixin
@@ -59,3 +65,36 @@ class EmailVerificationView(TitleMixin, TemplateView):
             return super().get(request, *args, **kwargs)
         else:
             return HttpResponseRedirect(reverse('main:index'))
+
+
+class UserResetPassword(TitleMixin, TemplateView):
+    title = 'Восстановление пароля'
+    template_name = 'users/pwd_reset.html'
+    success_url = 'users/'
+
+    def post(self, request):
+        """
+        Обрабатывает запрос на восстановление пароля.
+        """
+        if self.request.method == 'POST':
+            email = self.request.POST.get('email')
+            try:
+                user = User.objects.get(email=email)
+                token = secrets.token_hex(10)
+                link = f'{DOMAIN_NAME}/users'
+                if User.objects.filter(email=email).exists():
+                    subject = f'Восстановление пароля'
+                    message = (f'Для восстановления доступа к личному кабинет пройдите по ссылке: {link} '
+                               f'и воспользуйтесь временным паролем:\n {token}')
+                    send_mail(
+                        subject=subject,
+                        message=message,
+                        from_email=EMAIL_HOST_USER,
+                        recipient_list=[user.email],
+                        fail_silently=False,
+                    )
+                    user.password = make_password(token, salt=None, hasher='default')
+                    user.save()
+            except User.DoesNotExist:
+                return HttpResponse(f'Пользователь с электронной почтой {email} не найден.')
+        return render(request, self.template_name)
