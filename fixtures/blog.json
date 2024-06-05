@@ -1,0 +1,67 @@
+[
+{
+    "model": "blog.blogpost",
+    "pk": 4,
+    "fields": {
+        "owner": 13,
+        "title": "Пост",
+        "body": "содержание",
+        "image": "",
+        "views_count": 35,
+        "created_at": "2024-05-30T09:12:02.583Z",
+        "is_published": true
+    }
+},
+{
+    "model": "blog.blogpost",
+    "pk": 5,
+    "fields": {
+        "owner": 13,
+        "title": "test post",
+        "body": "test text",
+        "image": "blog/1_JWKBtYU.jpeg",
+        "views_count": 4,
+        "created_at": "2024-05-30T12:11:13.485Z",
+        "is_published": true
+    }
+},
+{
+    "model": "blog.blogpost",
+    "pk": 6,
+    "fields": {
+        "owner": 5,
+        "title": "пост 3",
+        "body": "текст поста",
+        "image": "",
+        "views_count": 39,
+        "created_at": "2024-06-04T03:36:15.092Z",
+        "is_published": false
+    }
+},
+{
+    "model": "blog.blogpost",
+    "pk": 8,
+    "fields": {
+        "owner": 13,
+        "title": "POST",
+        "body": "text",
+        "image": "",
+        "views_count": 15,
+        "created_at": "2024-06-04T04:45:56.337Z",
+        "is_published": true
+    }
+},
+{
+    "model": "blog.blogpost",
+    "pk": 10,
+    "fields": {
+        "owner": 13,
+        "title": "TEST POST",
+        "body": "TEXT",
+        "image": "",
+        "views_count": 11,
+        "created_at": "2024-06-05T03:44:02.344Z",
+        "is_published": true
+    }
+}
+]

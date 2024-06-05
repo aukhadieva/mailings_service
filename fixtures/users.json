@@ -1,0 +1,80 @@
+[
+{
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$87wd3sxMxmptcG1cgtPZe1$/unomCyRJBvmusWJDiKyJbxzgGF71f3w0Uq3BFk4ZLw=",
+        "last_login": "2024-06-05T06:06:47.191Z",
+        "is_superuser": true,
+        "first_name": "admin",
+        "last_name": "admin",
+        "is_staff": true,
+        "date_joined": "2024-05-29T06:45:11Z",
+        "email": "admin@bk.ru",
+        "image": "",
+        "is_active": true,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 13,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$ZK621iYiIApdjSxlSyvMRJ$J4S0eNVz/zwtFwmWBbzAwJKIHmAkDFGAxdDCiV45z5k=",
+        "last_login": "2024-06-05T08:43:06.222Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "date_joined": "2024-05-29T07:16:01Z",
+        "email": "sarole4ka@gmail.com",
+        "image": "users_images/avatar_Efi7U6b.jpeg",
+        "is_active": true,
+        "groups": [
+            3
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 16,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$PXDOGgL8qWhjWWm8xJmVmn$VaVIM//bmdccPdGGwm+9e9IihmWY7GKs8O0I10Apn44=",
+        "last_login": "2024-06-05T07:40:29.927Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "date_joined": "2024-05-29T15:17:46.100Z",
+        "email": "saratova.olga.s@mail.ru",
+        "image": "",
+        "is_active": true,
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.emailverification",
+    "pk": 11,
+    "fields": {
+        "user": 13,
+        "key": "5dda5178-9988-46cf-a139-19dbc211b6f1",
+        "created_at": "2024-05-29T07:16:02.008Z",
+        "expiration": "2024-05-30T07:16:02.008Z"
+    }
+},
+{
+    "model": "users.emailverification",
+    "pk": 14,
+    "fields": {
+        "user": 16,
+        "key": "48f48a79-7cc2-4e14-a2b1-eda5b8e3a1e2",
+        "created_at": "2024-05-29T15:17:46.633Z",
+        "expiration": "2024-05-30T15:17:46.633Z"
+    }
+}
+]

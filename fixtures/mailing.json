@@ -1,0 +1,224 @@
+[
+{
+    "model": "mailing.client",
+    "pk": 15,
+    "fields": {
+        "owner": null,
+        "full_name": "Саратова ОС",
+        "email": "saratova.olga.s@mail.ru",
+        "comment": "-"
+    }
+},
+{
+    "model": "mailing.client",
+    "pk": 17,
+    "fields": {
+        "owner": 16,
+        "full_name": "Саратова ОС",
+        "email": "olyaramilya@yandex.ru",
+        "comment": null
+    }
+},
+{
+    "model": "mailing.client",
+    "pk": 19,
+    "fields": {
+        "owner": 16,
+        "full_name": "Test client",
+        "email": "test@test.com",
+        "comment": null
+    }
+},
+{
+    "model": "mailing.client",
+    "pk": 20,
+    "fields": {
+        "owner": 16,
+        "full_name": "Test client",
+        "email": "test@bk.ru",
+        "comment": null
+    }
+},
+{
+    "model": "mailing.client",
+    "pk": 21,
+    "fields": {
+        "owner": 16,
+        "full_name": "Test",
+        "email": "test@gmail.com",
+        "comment": null
+    }
+},
+{
+    "model": "mailing.mailingmessage",
+    "pk": 5,
+    "fields": {
+        "owner": null,
+        "title": "Рассылка ежедневная",
+        "body": "Тело письма"
+    }
+},
+{
+    "model": "mailing.mailingmessage",
+    "pk": 7,
+    "fields": {
+        "owner": 16,
+        "title": "Разовая рассылка",
+        "body": "текст письма"
+    }
+},
+{
+    "model": "mailing.mailingmessage",
+    "pk": 8,
+    "fields": {
+        "owner": 16,
+        "title": "Тестовая рассылка",
+        "body": "Тест"
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 1,
+    "fields": {
+        "owner": 5,
+        "title": "Ежедневная рассылка",
+        "created_datetime": "2024-06-06T09:17:28.491Z",
+        "period": "daily",
+        "status": "launched",
+        "message": 5,
+        "target": [
+            15
+        ]
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 5,
+    "fields": {
+        "owner": 16,
+        "title": "Разовая рассылка",
+        "created_datetime": "2024-05-30T03:25:01.877Z",
+        "period": "once",
+        "status": "completed",
+        "message": 7,
+        "target": [
+            17
+        ]
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 6,
+    "fields": {
+        "owner": 16,
+        "title": "Еженедельная рассылка",
+        "created_datetime": "2024-06-11T09:34:09.945Z",
+        "period": "weekly",
+        "status": "launched",
+        "message": 8,
+        "target": [
+            15
+        ]
+    }
+},
+{
+    "model": "mailing.mailinglog",
+    "pk": 1,
+    "fields": {
+        "datetime_last_attempt": "2024-05-29T09:18:03.217Z",
+        "status": "успешно",
+        "server_response": "письмо отправлено",
+        "mailing_id": 1
+    }
+},
+{
+    "model": "mailing.mailinglog",
+    "pk": 3,
+    "fields": {
+        "datetime_last_attempt": "2024-05-30T03:25:02.994Z",
+        "status": "успешно",
+        "server_response": "письмо отправлено",
+        "mailing_id": 5
+    }
+},
+{
+    "model": "mailing.mailinglog",
+    "pk": 4,
+    "fields": {
+        "datetime_last_attempt": "2024-05-30T09:18:03.009Z",
+        "status": "успешно",
+        "server_response": "письмо отправлено",
+        "mailing_id": 1
+    }
+},
+{
+    "model": "mailing.mailinglog",
+    "pk": 5,
+    "fields": {
+        "datetime_last_attempt": "2024-05-31T09:18:02.659Z",
+        "status": "успешно",
+        "server_response": "письмо отправлено",
+        "mailing_id": 1
+    }
+},
+{
+    "model": "mailing.mailinglog",
+    "pk": 6,
+    "fields": {
+        "datetime_last_attempt": "2024-06-01T09:18:03.489Z",
+        "status": "успешно",
+        "server_response": "письмо отправлено",
+        "mailing_id": 1
+    }
+},
+{
+    "model": "mailing.mailinglog",
+    "pk": 7,
+    "fields": {
+        "datetime_last_attempt": "2024-06-02T11:05:08.254Z",
+        "status": "успешно",
+        "server_response": "письмо отправлено",
+        "mailing_id": 1
+    }
+},
+{
+    "model": "mailing.mailinglog",
+    "pk": 8,
+    "fields": {
+        "datetime_last_attempt": "2024-06-03T09:18:02.469Z",
+        "status": "успешно",
+        "server_response": "письмо отправлено",
+        "mailing_id": 1
+    }
+},
+{
+    "model": "mailing.mailinglog",
+    "pk": 9,
+    "fields": {
+        "datetime_last_attempt": "2024-06-04T09:18:03.391Z",
+        "status": "успешно",
+        "server_response": "письмо отправлено",
+        "mailing_id": 1
+    }
+},
+{
+    "model": "mailing.mailinglog",
+    "pk": 10,
+    "fields": {
+        "datetime_last_attempt": "2024-06-04T09:35:03.399Z",
+        "status": "успешно",
+        "server_response": "письмо отправлено",
+        "mailing_id": 6
+    }
+},
+{
+    "model": "mailing.mailinglog",
+    "pk": 12,
+    "fields": {
+        "datetime_last_attempt": "2024-06-05T10:02:03.451Z",
+        "status": "успешно",
+        "server_response": "письмо отправлено",
+        "mailing_id": 1
+    }
+}
+]
