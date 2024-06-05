@@ -10,4 +10,4 @@ class BlogPostForm(StyleMixin, ModelForm):
     """
     class Meta:
         model = BlogPost
-        fields = ('title', 'body', 'image')
+        fields = ('title', 'body', 'image', 'is_published',)
