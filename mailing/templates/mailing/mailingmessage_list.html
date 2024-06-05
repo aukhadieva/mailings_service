@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="mx-auto" style="width: 900px;">
-    <h1>Список сообщений рассылки</h1>
+    <h1>Письма</h1>
     <table class="table table-hover mt-5">
         <thead>
         <tr>
@@ -14,6 +14,7 @@
         </tr>
         </thead>
         {% for object in object_list %}
+        {% if user == object.owner or user.is_superuser %}
         <tbody>
         <tr>
             <th scope="row">{{ object.pk }}</th>
@@ -22,6 +23,7 @@
             <td>{{ object.body }}</td>
         </tr>
         </tbody>
+        {% endif %}
         {% endfor %}
     </table>
 </div>

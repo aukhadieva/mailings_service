@@ -1,31 +1,36 @@
 {% load static %}
+{% load my_media_tag %}
 
 <div class="container">
     <header class="border-bottom lh-1 py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
+
             <div class="col-4 pt-1">
-                {% if user.is_authenticated %}
-                {% if user.is_superuser or user.is_staff %}
+
                 <div class="dropdown">
+                    {% if user.is_authenticated %}
+                    {% if user.is_superuser or perms.mailing.add_mailing or perms.blog.add_blogpost %}
                     <button class="btn btn-sm btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                         Создать...
                     </button>
                     <ul class="dropdown-menu">
+                        {% if user.is_superuser or perms.mailing.add_mailing %}
                         <li><a class="dropdown-item" href="{% url 'mailing:create_client' %}">Создать клиента</a></li>
-                        <li><a class="dropdown-item" href="{% url 'mailing:create_message' %}">Создать сообщение</a>
-                        </li>
+                        <li><a class="dropdown-item" href="{% url 'mailing:create_message' %}">Создать сообщение</a></li>
                         <li><a class="dropdown-item" href="{% url 'mailing:create_mailing' %}">Создать рассылку</a></li>
+                        {% endif %}
+                        {% if user.is_superuser or perms.blog.add_blogpost %}
+                        <li><a class="dropdown-item" href="{% url 'blog:create_post' %}">Создать пост</a></li>
+                        {% endif %}
                     </ul>
+                    {% endif %}
+                    {% endif %}
                 </div>
-                {% else %}
-                <a class="btn btn-sm btn-outline-dark" href="#">Создать пост</a>
-                {% endif %}
-                {% endif %}
             </div>
             <div class="col-4 text-center">
-                <a class="blog-header-logo text-body-emphasis text-decoration-none" href="{% url 'main:index' %}"><img
-                    src="{% static 'images/logo.png' %}" alt="logo" width="60" height="54"></a>
+                <a class="blog-header-logo text-body-emphasis text-decoration-none" href="{% url 'main:home_page' %}"><img
+                        src="{% static 'images/logo.png' %}" alt="logo" width="60" height="54"></a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 <a class="link-secondary" href="#" aria-label="Search">
@@ -40,27 +45,36 @@
                     {% if user.is_authenticated %}
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <img src="{% if user.image %} {% my_media user.image %} {% else %} {% static 'images/default_avatar.jpg' %} {% endif %}" alt="mdo" width="32" height="32"
+                             class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small" style="">
                         <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
-                        <li><a class="dropdown-item" href="{% url 'users:profile' %}">Настройки</a></li>
-                        {% if user.is_superuser or user.is_staff %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
+                        {% if user.is_superuser or user.is_staff %}
                         <li><a class="dropdown-item" href="{% url 'admin:index' %}">Админпанель</a></li>
-                        <li><a class="dropdown-item" href="{% url 'mailing:client_list' %}">Список клиентов</a></li>
-                        <li><a class="dropdown-item" href="{% url 'mailing:message_list' %}">Список сообщений</a></li>
-                        <li><a class="dropdown-item" href="{% url 'mailing:mailing_list' %}">Список рассылок</a></li>
+                        {% endif %}
+                        {% if perms.mailing.change_mailing_status or perms.mailing.change_mailing %}
+                        <li><a class="dropdown-item" href="{% url 'mailing:client_list' %}">Клиенты</a></li>
+                        <li><a class="dropdown-item" href="{% url 'mailing:mailing_list' %}">Рассылки</a></li>
+                        {% endif %}
+                        {% if perms.mailing.change_mailing %}
+                        <li><a class="dropdown-item" href="{% url 'mailing:message_list' %}">Письма</a></li>
                         <li><a class="dropdown-item" href="{% url 'mailing:mailinglogs_list' %}">Логи рассылок</a></li>
                         {% endif %}
                         <li>
-                            <hr class="dropdown-divider">
+                            <!--                            <hr class="dropdown-divider">-->
                         </li>
-                        <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
+                        <div class="container mt-2">
+                            <form action="{% url 'users:logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-light">Выйти</button>
+                            </form>
+                        </div>
                         {% else %}
-                        <a class="btn btn-sm btn-success" href="{% url 'users:sign_in' %}">Войти</a>
+                        <a class="btn btn-sm btn-dark" href="{% url 'users:login' %}">Войти</a>
                         {% endif %}
                     </ul>
                 </div>

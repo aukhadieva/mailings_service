@@ -9,13 +9,14 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Дата и время последней попытки</th>
+            <th scope="col">Дата и время <br> последней попытки</th>
             <th scope="col">Статус попытки</th>
-            <th scope="col">Ответ почтового сервера</th>
+            <th scope="col">Ответ <br> почтового сервера</th>
             <th scope="col">Рассылка</th>
         </tr>
         </thead>
         {% for object in object_list %}
+        {% if user == object.mailing_id.owner or user.is_superuser %}
         <tbody>
         <tr>
             <th scope="row">{{ object.pk }}</th>
@@ -25,6 +26,7 @@
             <td>{{ object.mailing_id }}</td>
         </tr>
         </tbody>
+        {% endif %}
         {% endfor %}
     </table>
 </div>

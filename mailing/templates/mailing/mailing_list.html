@@ -3,8 +3,8 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="mx-auto">
-    <h1>Список рассылок</h1>
+<div class="mx-auto" style="width: 900px;">
+    <h1>Рассылки</h1>
     <table class="table table-hover mt-5">
         <thead>
         <tr>
@@ -18,17 +18,23 @@
         </tr>
         </thead>
         {% for object in object_list %}
+        {% if user == object.owner or user.is_superuser or perms.mailing.change_mailing_status %}
         <tbody>
         <tr>
             <th scope="row">{{ object.pk }}</th>
             <td><a href="{% url 'mailing:view_mailing' object.pk %}" class="nav-link px-2 text-body-dark">{{ object.title }}</a></td>
             <td>{{ object.owner }}</td>
             <td>{{ object.message }}</td>
-            <td>{{ object.period }}</td>
-            <td>{{ object.status }}</td>
-            <td>{{ object.target }}</td>
+            <td>{{ object.get_period_display }}</td>
+            <td>{{ object.get_status_display }}</td>
+            <td>
+                {% for client in object.target.all %}
+                {{ client }} <br>
+                {% endfor %}
+            </td>
         </tr>
         </tbody>
+        {% endif %}
         {% endfor %}
     </table>
 </div>

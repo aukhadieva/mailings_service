@@ -9,10 +9,16 @@
         <div class="card-body">
             <p class="card-text"><strong>Тема письма:</strong> {{ object.title }} </p>
             <p class="card-text"><strong>Тело письма:</strong> {{ object.body }} </p>
+            {% if user == object.owner or user.is_superuser %}
             <div class="group">
                 <a href="{% url 'mailing:edit_message' object.pk %}" class="btn btn-warning">Редактировать</a>
-                <a href="{% url 'mailing:delete_message' object.pk %}" class="btn btn-danger">Удалить</a>
+                <!-- Кнопка-триггер модального окна -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Удалить письмо
+                </button>
+                {% include 'mailing/mailingmessage_confirm_delete.html' %}
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
