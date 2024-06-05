@@ -12,14 +12,19 @@
             <p class="card-text"><strong>Сообщение рассылки:</strong> {{ object.message }} </p>
             <p class="card-text"><strong>Получатели рассылки:</strong> {% for client in object.target.all %} {{ client }} <br> {% endfor %} </p>
             <p class="card-text"><strong>Периодичность рассылки:</strong> {{ object.get_period_display }} </p>
-            <p class="card-text"><strong>Дата и время первой отправки рассылки:</strong> {{ object.created_datetime }}</p>
+            <p class="card-text"><strong>Дата и время первой отправки рассылки:</strong> {{ object.created_datetime }}
+            </p>
             <p class="card-text"><strong>Статус рассылки:</strong> {{ object.get_status_display }} </p>
             <div class="group">
                 {% if perms.mailing.change_mailing_status or user == object.owner or user.is_superuser %}
                 <a href="{% url 'mailing:edit_mailing' object.pk %}" class="btn btn-warning">Редактировать</a>
                 {% endif %}
                 {% if user == object.owner or user.is_superuser %}
-                <a href="{% url 'mailing:delete_mailing' object.pk %}" class="btn btn-danger">Удалить</a>
+                <!-- Кнопка-триггер модального окна -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Удалить рассылку
+                </button>
+                {% include 'mailing/mailing_confirm_delete.html' %}
                 {% endif %}
             </div>
         </div>
