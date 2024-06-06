@@ -4,6 +4,7 @@ from django.views.decorators.cache import cache_page
 from blog.apps import BlogConfig
 from blog.views import BlogPostCreateView, BlogPostUpdateView, BlogPostDetailView, BlogPostDeleteView
 
+
 app_name = BlogConfig.name
 
 urlpatterns = [
