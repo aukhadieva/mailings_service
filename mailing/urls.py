@@ -7,6 +7,7 @@ from mailing.views import (ClientCreateView, ClientListView, ClientDetailView, C
                            MailingCreateView, MailingListView, MailingDetailView, MailingDeleteView, MailingUpdateView,
                            MailingLogListView, MailingLogDetailView)
 
+
 app_name = MailingConfig.name
 
 urlpatterns = [

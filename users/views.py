@@ -83,7 +83,7 @@ class UserResetPassword(TitleMixin, TemplateView):
                 token = secrets.token_hex(10)
                 link = f'{DOMAIN_NAME}/users'
                 if User.objects.filter(email=email).exists():
-                    subject = f'Восстановление пароля'
+                    subject = 'Восстановление пароля'
                     message = (f'Для восстановления доступа к личному кабинет пройдите по ссылке: {link} '
                                f'и воспользуйтесь временным паролем:\n {token}')
                     send_mail(
