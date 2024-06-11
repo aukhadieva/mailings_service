@@ -117,6 +117,14 @@ class MailingCreateView(TitleMixin, LoginRequiredMixin, PermissionRequiredMixin,
         mailing.save()
         return super().form_valid(form)
 
+    def get_form_kwargs(self):
+        """
+        Задает пару ключ-значение в kwargs. Затем эти kwargs передаются в форму.
+        """
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
 
 class MailingListView(TitleMixin, LoginRequiredMixin, ListView):
     model = Mailing
