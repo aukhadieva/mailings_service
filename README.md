@@ -29,7 +29,7 @@
 
 1. Клонируйте проект
    ```sh
-   git@github.com:aukhadieva/online_store_project.git
+   git@github.com:aukhadieva/mailings_service.git
    ```
 2. Убедитесь, что вы получили из удаленного репозитория все ветки и переключились на ветку разработки develop
    ```sh
